@@ -57,3 +57,13 @@ typings/
 # dotenv environment variables file
 .env
 
+#Webstorm
+/.idea
+
+#Visual Studio 2017
+*.sln
+*.njsproj
+
+#Visual Studio Code
+/.vs
+
