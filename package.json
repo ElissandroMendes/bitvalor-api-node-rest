@@ -9,10 +9,9 @@
   ],
   "author": {
     "name": "Luiz Fernando",
-    "email": "luiz.silva@smarti9.com.br"
+    "email": "lfernando-silva@hotmail.com"
   },
   "contributors": [],
-  "bugs": {},
   "directories": {
     "lib": "src",
     "test": "test/"
@@ -28,6 +27,7 @@
     "mocha": "mocha test/ --recursive"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -36,8 +36,13 @@
     "feathers-errors": "^2.9.2",
     "feathers-hooks": "^2.1.0",
     "feathers-hooks-common": "^3.7.3",
+    "feathers-nedb": "^2.7.0",
     "feathers-rest": "^1.8.0",
     "helmet": "^3.8.2",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.1",
+    "moment-timezone": "^0.5.13",
+    "nedb": "^1.8.0",
     "serve-favicon": "^2.4.5",
     "winston": "^2.4.0"
   },
