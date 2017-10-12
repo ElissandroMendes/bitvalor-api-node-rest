@@ -67,3 +67,5 @@ typings/
 #Visual Studio Code
 /.vs
 
+#NeDB data folder
+/data
