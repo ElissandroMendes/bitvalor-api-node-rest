@@ -38,7 +38,7 @@ const check = filters => {
 
       if(filters.exchange
         && !names[filters.exchange]
-        && !filters.exchange.match(/[a-z0-9]/gi
+        && !filters.exchange.match(/[a-z0-9_]/gi
           && !filters.exchange.match(names.initials)))
         ErrorHandler.getError('paramsNotDefault', null, ' exchange')
 

@@ -82,8 +82,22 @@ describe('Order Book', () => {
         })
     })
 
-    it('Deve retornar Bad Request se existir a exchange pedida não existir na documentação da API.',()=>{
+    it('Deve retornar Bad Request se a sigla da exchange pedida não existir na documentação da API.',()=>{
       return makeRequest('http://localhost:3030/order-book?exchange=abc')
+        .catch(res => {
+          assert.equal(res.statusCode,400)
+        })
+    })
+
+    it('Deve retornar Bad Request se o nome da exchange pedida não existir na documentação da API.',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchange=bitcoinforyou')
+        .catch(res => {
+          assert.equal(res.statusCode,400)
+        })
+    })
+
+    it('Deve retornar Bad Request se a exchange pedida possuir caracteres não alfanuméricos (exceto _)',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchange=abc*')
         .catch(res => {
           assert.equal(res.statusCode,400)
         })
