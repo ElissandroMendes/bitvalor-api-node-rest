@@ -51,8 +51,16 @@ describe('Order Book', () => {
       cached: true
     }).then(() => makeRequest('http://localhost:3030/order-book'))
       .then(res => {
-        console.log(process.env.NODE_ENV)
         assert.equal(res.data[0].cached, true)
+      })
+  })
+
+  it('Deve receber as listas de bids e asks se o parâmetro exchange estiver incorreto',()=>{
+    return makeRequest('http://localhost:3030/order-book?exchangeabc=bids')
+      .then(res => {
+        assert.equal(res.data.length > 0, true)
+        assert.equal(res.data[0].bids.length > 0, true)
+        assert.equal(res.data[0].asks.length > 0, true)
       })
   })
 })

@@ -24,7 +24,7 @@
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive"
+    "mocha": "mocha test/ --recursive --timeout 5000"
   },
   "dependencies": {
     "axios": "^0.16.2",
