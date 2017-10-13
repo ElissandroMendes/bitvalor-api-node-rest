@@ -23,44 +23,67 @@ describe('Order Book', () => {
     assert.ok(service, 'Registered the service')
   })
 
-  it('Deve receber erro 405 em qualquer requisição que não seja GET com parâmetros', () => {
-    //Como o framework bloqueia todos da mesma maneira, apenas o GET/id será testado para fins de legibilidade.
-    return makeRequest('http://localhost:3030/order-book/42')
-      .catch(res => {
-        assert.equal(res.statusCode, 405)
-      })
-  })
+  describe('Order book # endpoint', ()=> {
+    it('Deve receber erro 405 em qualquer requisição que não seja GET com parâmetros', () => {
+      //Como o framework bloqueia todos da mesma maneira, apenas o GET/id será testado para fins de legibilidade.
+      return makeRequest('http://localhost:3030/order-book/42')
+        .catch(res => {
+          assert.equal(res.statusCode, 405)
+        })
+    })
 
-  it('Deve receber resposta 200 OK e a flag cached=true, ou seja, os dados vieram do cache.', () => {
-    return app.service('order-book').create({
-      asks: [],
-      bids: [],
-      createdAt: Date.now(),
-      cached: true
-    }).then(() => makeRequest('http://localhost:3030/order-book/'))
-      .then(res => {
-        assert.equal(res.data[0].cached, true)
-      })
-  })
+    it('Deve receber resposta 200 OK e a flag cached=true, ou seja, os dados vieram do cache.', () => {
+      return app.service('order-book').create({
+        asks: [1],
+        bids: [1],
+        createdAt: Date.now(),
+        cached: true
+      }).then(() => makeRequest('http://localhost:3030/order-book/'))
+        .then(res => {
+          assert.equal(res.data[0].cached, true)
+        })
+    })
 
-  it('Deve receber resposta 200 OK e a flag cached=false, ou seja, os dados vieram do API.', () => {
-    return app.service('order-book').create({
-      asks: [],
-      bids: [],
-      createdAt: Date.now() - 60 * 1000 + 1,
-      cached: true
-    }).then(() => makeRequest('http://localhost:3030/order-book'))
-      .then(res => {
-        assert.equal(res.data[0].cached, true)
-      })
+    it('Deve receber resposta 200 OK e a flag cached=false, ou seja, os dados vieram do API.', () => {
+      return app.service('order-book').create({
+        asks: [1],
+        bids: [1],
+        createdAt: Date.now() - 60001,
+        cached: true
+      }).then(() => makeRequest('http://localhost:3030/order-book'))
+        .then(res => {
+          assert.equal(res.data[0].cached, true)
+        })
+    })
   })
+  describe('Order book # filters', ()=>{
+    it('Deve receber a lista de bids sem filtro ao passar o parâmetro exchange=bids.',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchange=bids')
+        .then(res => {
+          assert.equal(res.data.length > 0, true)
+          assert.equal(res.data[0].bids.length > 0, true)
+          assert.equal(res.data[0].asks === undefined, true)
+        })
+    })
 
-  it('Deve receber as listas de bids e asks se o parâmetro exchange estiver incorreto',()=>{
-    return makeRequest('http://localhost:3030/order-book?exchangeabc=bids')
-      .then(res => {
-        assert.equal(res.data.length > 0, true)
-        assert.equal(res.data[0].bids.length > 0, true)
-        assert.equal(res.data[0].asks.length > 0, true)
-      })
+    it('Deve receber a lista de asks sem filtro ao passar o parâmetro exchange=asks.',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchange=asks')
+        .then(res => {
+          assert.equal(res.data.length > 0, true)
+          assert.equal(res.data[0].asks.length > 0, true)
+          assert.equal(res.data[0].bids === undefined, true)
+        })
+    })
+
+    it('Deve receber as listas de bids e asks se o parâmetro exchange estiver incorreto',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchangeabc=bids')
+        .then(res => {
+          assert.equal(res.data.length > 0, true)
+          assert.equal(res.data[0].bids.length > 0, true)
+          assert.equal(res.data[0].asks.length > 0, true)
+        })
+    })
   })
 })
+
+
