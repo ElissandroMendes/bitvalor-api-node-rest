@@ -57,8 +57,8 @@ describe('Order Book', () => {
     })
   })
   describe('Order book # filters', ()=>{
-    it('Deve receber a lista de bids sem filtro ao passar o parâmetro exchange=bids.',()=>{
-      return makeRequest('http://localhost:3030/order-book?exchange=bids')
+    it('Deve receber a lista de bids sem filtro ao passar o parâmetro book=bids.',()=>{
+      return makeRequest('http://localhost:3030/order-book?book=bids')
         .then(res => {
           assert.equal(res.data.length > 0, true)
           assert.equal(res.data[0].bids.length > 0, true)
@@ -66,8 +66,8 @@ describe('Order Book', () => {
         })
     })
 
-    it('Deve receber a lista de asks sem filtro ao passar o parâmetro exchange=asks.',()=>{
-      return makeRequest('http://localhost:3030/order-book?exchange=asks')
+    it('Deve receber a lista de asks sem filtro ao passar o parâmetro book=asks.',()=>{
+      return makeRequest('http://localhost:3030/order-book?book=asks')
         .then(res => {
           assert.equal(res.data.length > 0, true)
           assert.equal(res.data[0].asks.length > 0, true)
@@ -75,12 +75,17 @@ describe('Order Book', () => {
         })
     })
 
-    it('Deve receber as listas de bids e asks se o parâmetro exchange estiver incorreto',()=>{
-      return makeRequest('http://localhost:3030/order-book?exchangeabc=bids')
-        .then(res => {
-          assert.equal(res.data.length > 0, true)
-          assert.equal(res.data[0].bids.length > 0, true)
-          assert.equal(res.data[0].asks.length > 0, true)
+    it('Deve retornar Bad Request se existir algum parâmetro que não seja: book,exchange,price e volume.',()=>{
+      return makeRequest('http://localhost:3030/order-book?bookabc=bids')
+        .catch(res => {
+          assert.equal(res.statusCode,400)
+        })
+    })
+
+    it('Deve retornar Bad Request se existir a exchange pedida não existir na documentação da API.',()=>{
+      return makeRequest('http://localhost:3030/order-book?exchange=abc')
+        .catch(res => {
+          assert.equal(res.statusCode,400)
         })
     })
   })

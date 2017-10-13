@@ -2,13 +2,13 @@ const _ = require('lodash')
 
 const ErrorHandler = require('./ErrorHandler')
 
-const defaultParams = ['name','price', 'volume']
+const defaultParams = ['book','exchange', 'price', 'volume']
 const operators = ['$between']
 
 const MAX_VALUE = 999999999
 const MIN_VALUE = -999999999
 
-const validParams = {
+const names = {
   name: {
     'arena_bitcoin': 'arn',
     'bitcointoyou': 'b2u',
@@ -25,57 +25,42 @@ const validParams = {
   initials: 'arnb2ubasbivbsqflwfoxlocmbtnegpax'
 }
 
-const checkParams = params => {
-  const filters = params[0]
-  const data = params[1]
+const paramsAreInList = (paramsNames, defaultParams) =>
+  paramsNames.filter(pname => defaultParams.indexOf(pname) === -1)
 
+const check = filters => {
   return Promise.resolve(filters)
     .then(filters => {
-      const paramsNames = Object.keys(filters)
-      if (_.intersection(defaultParams, paramsNames).length < paramsNames.length)
-        return ErrorHandler.throwError('paramsNotDefault', _.difference(defaultParams, paramsNames))
+      const paramsNames = paramsAreInList(Object.keys(filters), defaultParams)
 
-      if(filters.name && typeof filters.name !== "string")
-        return ErrorHandler.throwError('paramsNotDefault', ' name')
+      if (paramsNames.length > 0)
+        ErrorHandler.getError('paramsNotDefault', null, paramsNames)
 
-      if(filters.price){
+      if(filters.exchange
+        && !names[filters.exchange]
+        && !filters.exchange.match(/[a-z0-9]/gi
+          && !filters.exchange.match(names.initials)))
+        ErrorHandler.getError('paramsNotDefault', null, ' exchange')
+
+      if (filters.price) {
         filters.price.$between = JSON.parse(filters.price.$between)
-        if(!Array.isArray(filters.price.$between)) return ErrorHandler.throwError('paramsNotDefault', ' price')
+        if (!Array.isArray(filters.price.$between)) ErrorHandler.getError('paramsNotDefault', null, ' price')
       }
-
-      if(filters.volume){
+      if (filters.volume) {
         filters.volume.$between = JSON.parse(filters.volume.$between)
-        if(!Array.isArray(filters.volume.$between)) return ErrorHandler.throwError('paramsNotDefault', ' volume')
+        if (!Array.isArray(filters.volume.$between)) ErrorHandler.getError('paramsNotDefault', null, ' volume')
       }
 
-      return [filters,data]
-    }).then(params => {
-      return params[1]
+      return filters
     })
-
- /* return Promise.resolve(params)
-    .then(params => {
-      if (!params) return params
-
-      const paramsNames = Object.keys(params)
-      if (_.intersection(defaultParams, paramsNames).length < paramsNames.length)
-        ErrorHandler.throwError('paramsNotDefault', _.difference(defaultParams, paramsNames))
-
-      return params
-
-
-    })*/
-}
-
-const query = (data, params) => {
-
 }
 
 module.exports = {
+  check: check,
   filter: (filters, data) => {
     return Promise
-      .resolve([filters,data])
-      .then(checkParams)
+      .resolve([filters, data])
+      .then(params => params[1])
       .catch(console.log)
   }
 
