@@ -160,8 +160,8 @@ describe('Order Book', () => {
     })
 
     describe('Order book # filters => price e volume (as validações são as mesmas)', () => {
-      it('Deve retornar Bad Request se price é vazio ou não está num array.', () => {
-        return makeRequest('http://localhost:3030/order-book?price=')
+      it('Deve retornar Bad Request se price não está num array.', () => {
+        return makeRequest('http://localhost:3030/order-book?price=3,5')
         .catch(res => {
           assert.equal(res.statusCode, 400)
         })
