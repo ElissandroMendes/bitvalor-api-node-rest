@@ -20,7 +20,7 @@ API RESTful que consome dados da [Bitvalor API](https://bitvalor.com/api).
   * A aplicação executa nos host e port definidos em /config/default.json (atualmente localhost:3030)
 
 ## Testando o projeto
-    * No diretório onde encontra-se o arquivo descritor de dependências (package.json), executar o comando:
+  * No diretório onde encontra-se o arquivo descritor de dependências (package.json), executar o comando:
 ```sh
  $ npm test
 ```
