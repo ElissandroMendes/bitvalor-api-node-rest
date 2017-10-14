@@ -10,7 +10,5 @@ const configs = {
 const makeRequest = params => Axios(Object.assign(params, configs)).then(res => res.data)
 
 module.exports = {
-  get: params => {
-    return makeRequest(Object.assign(params, {method: 'GET'}))
-  }
+  get: params => makeRequest(Object.assign(params, {method: 'GET'}))
 }

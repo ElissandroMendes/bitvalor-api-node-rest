@@ -10,8 +10,8 @@ const isTimeToRequest = createdAt => DateHandler.diff(Date.now(), createdAt, 'mi
 const getOrderBook = hook => {
   const OrderBook = hook.app.service('order-book')
 
-  return RequestHandler.get({url})
-    .then(response => OrderBook.create(Object.assign(response, {createdAt: Date.now(), cached: true})))
+  return RequestHandler.get({ url })
+    .then(response => OrderBook.create(Object.assign(response, { createdAt: Date.now(), cached: true })))
     .then(created => {
       hook.result.data[0] = created
       hook.result.data[0].cached = false
@@ -27,9 +27,8 @@ module.exports = {
         return isAllowed
           ? getOrderBook(hook)
           : hook
-      }).then(hook => {
-        return ParamsHandler.filter(hook.params.filters, hook.result)
-      }).then(res => {
+      }).then(hook => ParamsHandler.filter(hook.params.filters, hook.result))
+      .then(res => {
         hook.result = res
         return hook
       })

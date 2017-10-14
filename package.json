@@ -39,7 +39,6 @@
     "feathers-nedb": "^2.7.0",
     "feathers-rest": "^1.8.0",
     "helmet": "^3.8.2",
-    "lodash": "^4.17.4",
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.13",
     "nedb": "^1.8.0",

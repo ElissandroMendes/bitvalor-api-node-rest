@@ -142,7 +142,6 @@ describe('Order Book', () => {
       it('Deve retornar a lista filtrada por exchange=loc.', () => {
         return makeRequest('http://localhost:3030/order-book?exchange=loc')
         .then(res => {
-          console.log(res)
           let resultBids = res.data[0].bids.filter(e => e[0] === 'LOC')
           let resultAsks = res.data[0].asks.filter(e => e[0] === 'LOC')
           assert.equal(resultBids.length, res.data[0].bids.length)
