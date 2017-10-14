@@ -28,7 +28,7 @@ module.exports = {
           ? getOrderBook(hook)
           : hook
       }).then(hook => {
-        return ParamsHandler.filter(hook.params.filters,hook.result)
+        return ParamsHandler.filter(hook.params.filters, hook.result)
       }).then(res => {
         hook.result = res
         return hook

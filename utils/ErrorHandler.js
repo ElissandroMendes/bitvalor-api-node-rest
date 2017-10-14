@@ -6,6 +6,6 @@ const errors = {
 
 module.exports = {
   getError: (error, errorType, params) => {
-     throw new FeathersErrors.errors[errorType || 'BadRequest'](`Erro: ${errors[error]}: ${params}`)
+     throw new FeathersErrors.errors[errorType || 'BadRequest'](`Erro: ${errors[error] || 'Error'}: ${params}`)
   }
 }
