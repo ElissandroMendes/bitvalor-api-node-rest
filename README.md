@@ -45,20 +45,20 @@ Ex: /book=bids&price[$between]=[15000,18000]&exchange=loc
 Ex: /order-book?book=bids
 ```
 
-* "exchange" (String): Nome ou a sigla de alguma das seguintes exchanges: 
-| Sigla |    Nome       |
-|-------|---------------|
-|  ARN  | Arena Bitcoin |
-|  B2U  | BitcoinToYou  |
-|  BAS  | Basebit       |
-|  BIV  | Bitinvest     |
-|  BSQ  | Bitsquare     |
-|  FLW  | flowBTC       |
-|  FOX  | FoxBit        |
-|  LOC  | LocalBitcoins |
-|  MBT  |Mercado Bitcoin|
-|  NEG  | Negocie Coins |
-|  PAX  |    Paxful     |
+* "exchange" (String): Nome ou a sigla de alguma das seguintes exchanges:
+
+- ARN: Arena Bitcoin
+- B2U: BitcoinToYou
+- BAS: Basebit
+- BIV: Bitinvest
+- BSQ: Bitsquare
+- FLW: flowBTC
+- FOX: FoxBit
+- LOC: LocalBitcoins
+- MBT: Mercado Bitcoin
+- NEG: Negocie Coins
+- PAX: Paxful
+
 ** Os nomes das exchanges que são compostos devem ser separados por _ (underscore) na querystring.
 
 ```
