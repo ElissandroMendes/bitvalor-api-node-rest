@@ -1,19 +1,22 @@
 const commonHooks = require('feathers-hooks-common')
 
+const Before = require('./hooks/before.hooks')
+const After = require('./hooks/after.hooks')
+
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [Before.onFind],
     get: [commonHooks.disallow()],
-    create: [commonHooks.disallow()],
-    update: [commonHooks.disallow()],
+    create: [commonHooks.disallow('external')],
+    update: [commonHooks.disallow('external')],
     patch: [commonHooks.disallow()],
     remove: [commonHooks.disallow()]
   },
 
   after: {
     all: [],
-    find: [],
+    find: [After.onFind],
     get: [],
     create: [],
     update: [],

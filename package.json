@@ -1,18 +1,17 @@
 {
   "name": "bitvalor-api-node-rest",
   "description": "API RESTful que consome dados da Bitvalor API.",
-  "version": "0.0.0",
-  "homepage": "",
+  "version": "0.3.0",
+  "homepage": "https://github.com/lfernando-silva",
   "main": "src",
   "keywords": [
     "feathers"
   ],
   "author": {
     "name": "Luiz Fernando",
-    "email": "luiz.silva@smarti9.com.br"
+    "email": "lfernando-silva@hotmail.com"
   },
   "contributors": [],
-  "bugs": {},
   "directories": {
     "lib": "src",
     "test": "test/"
@@ -25,9 +24,10 @@
     "test": "npm run eslint && npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive"
+    "mocha": "mocha test/ --recursive --timeout 15000 --fix"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -36,8 +36,12 @@
     "feathers-errors": "^2.9.2",
     "feathers-hooks": "^2.1.0",
     "feathers-hooks-common": "^3.7.3",
+    "feathers-nedb": "^2.7.0",
     "feathers-rest": "^1.8.0",
     "helmet": "^3.8.2",
+    "moment": "^2.19.1",
+    "moment-timezone": "^0.5.13",
+    "nedb": "^1.8.0",
     "serve-favicon": "^2.4.5",
     "winston": "^2.4.0"
   },
