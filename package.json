@@ -1,8 +1,8 @@
 {
   "name": "bitvalor-api-node-rest",
   "description": "API RESTful que consome dados da Bitvalor API.",
-  "version": "0.0.0",
-  "homepage": "",
+  "version": "0.3.0",
+  "homepage": "https://github.com/lfernando-silva",
   "main": "src",
   "keywords": [
     "feathers"

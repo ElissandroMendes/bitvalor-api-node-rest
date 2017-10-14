@@ -17,7 +17,7 @@ API RESTful que consome dados da [Bitvalor API](https://bitvalor.com/api).
  ```sh
  $ npm start
  ```
-  * A aplicação executa nos host e port definidos em /config/default.json (atualmente localhost:3011)
+  * A aplicação executa nos host e port definidos em /config/default.json (atualmente localhost:3030)
 
 ## Testando o projeto
     * No diretório onde encontra-se o arquivo descritor de dependências (package.json), executar o comando:
@@ -59,10 +59,12 @@ Ex: /order-book?book=bids
 |  MBT  |Mercado Bitcoin|
 |  NEG  | Negocie Coins |
 |  PAX  |    Paxful     |
-** Os nomes das exchanges devem ser separados por _ (underscore) na querystring.
+** Os nomes das exchanges que são compostos devem ser separados por _ (underscore) na querystring.
 
 ```
-Ex: /order-book?exchange=neg
+Ex: 
+/order-book?exchange=negocie_coins
+/order-book?exchange=neg
 ```
 
 * "price" (Array): Intervalo de preços máximo e mínimo, que é passado por um array de duas posições marcados com a flag $between.
