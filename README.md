@@ -64,7 +64,7 @@ Ex: /order-book?book=bids
 ```
 Ex: 
 /order-book?exchange=negocie_coins
-/order-book?exchange=neg
+/order-book?exchange=loc
 ```
 
 * "price" (Array): Intervalo de preços máximo e mínimo, que é passado por um array de duas posições marcados com a flag $between.
