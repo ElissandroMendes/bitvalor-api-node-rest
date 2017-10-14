@@ -67,13 +67,13 @@ Ex:
 /order-book?exchange=loc
 ```
 
-* "price" (Array): Intervalo de preços máximo e mínimo, que é passado por um array de duas posições marcados com a flag $between.
+* "price" (Array): Intervalo de preços mínimo e máximo, respectivamente, que é passado por um array de duas posições marcados com a flag $between.
 
 ```
 Ex: /order-book?price[$between]=[20000,21000]
 ```
 
-*  "volume" (Array):  Intervalo de volumes máximo e mínimo, que é passado por um array de duas posições marcados com a flag $between.
+*  "volume" (Array):  Intervalo de volumes mínimo e máximo, respectivamente, que é passado por um array de duas posições marcados com a flag $between.
 
 ```
 Ex: /order-book?volume[$between]=[0.3,0.6]
