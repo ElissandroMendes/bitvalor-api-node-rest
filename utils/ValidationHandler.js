@@ -26,7 +26,14 @@ const checkBetween = (filter, filterName) => {
     ? JSON.parse(filter.$between)
     : [MIN_VALUE, MAX_VALUE]
 
-  if (!Array.isArray(filter.$between)) ErrorHandler.getError('paramsNotDefault', null, ` ${filterName}`)
+  if (filter.$between[0] === 'null' || filter.$between[0] === null || filter.$between[0] < MIN_VALUE)
+    filter.$between[0] = MIN_VALUE
+
+  if (filter.$between[1] === 'null' || filter.$between[1] === null || filter.$between[1] < MAX_VALUE)
+    filter.$between[1] = MAX_VALUE
+
+  if (!Array.isArray(filter.$between))
+    ErrorHandler.getError('paramsNotDefault', null, ` ${filterName}`)
 
   return filter
 }
@@ -36,10 +43,11 @@ const validateExchangeName = exchange => {
   let validName = validations.name[exchange]
   let matchRegex = exchange.match(/[a-z0-9_]/gi)
   let matchInitials = validations.initials.match(exchange)
-  if (!validName && !matchRegex && !matchInitials)
-    ErrorHandler.getError('paramsNotDefault', null, ' exchange')
 
-  return exchange
+  if (matchRegex && validName || matchInitials)
+    return exchange
+
+  ErrorHandler.getError('paramsNotDefault', null, ' exchange')
 }
 
 const validateBook = book => {
@@ -48,4 +56,4 @@ const validateBook = book => {
   return book
 }
 
-module.exports = {validateBook, validateExchangeName, checkBetween}
+module.exports = { validateBook, validateExchangeName, checkBetween }

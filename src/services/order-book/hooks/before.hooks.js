@@ -12,17 +12,17 @@ module.exports = {
           delete hook.params.query.book
         }
         if (filters.exchange) {
-          hook.params.filters = Object.assign(hook.params.filters, {exchange:filters.exchange})
+          hook.params.filters = Object.assign(hook.params.filters || {}, {exchange:filters.exchange})
           delete hook.params.query.exchange
         }
 
         if (filters.price) {
-          hook.params.filters = Object.assign(hook.params.filters, {price:filters.price})
+          hook.params.filters = Object.assign(hook.params.filters || {}, {price:filters.price})
           delete hook.params.query.price
         }
 
         if (filters.volume) {
-          hook.params.filters = Object.assign(hook.params.filters, {volume:filters.volume})
+          hook.params.filters = Object.assign(hook.params.filters || {}, {volume:filters.volume})
           delete hook.params.query.volume
         }
 

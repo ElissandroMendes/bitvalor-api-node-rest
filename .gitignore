@@ -69,3 +69,6 @@ typings/
 
 #NeDB data folder
 /data
+
+#VS Project
+/bitvalor
